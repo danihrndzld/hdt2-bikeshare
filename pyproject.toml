@@ -1,0 +1,46 @@
+[project]
+name = "bikeshare"
+version = "0.1.0"
+description = "Billing and rental core of a city bike service, used as practice code for Hoja de Trabajo 2"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+bikeshare = "bikeshare.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+xfail_strict = true
+
+[tool.coverage.run]
+source_pkgs = ["bikeshare"]
+branch = true
+omit = [
+    "*/cli.py",
+    "*/__main__.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
